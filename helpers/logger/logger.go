@@ -2,6 +2,7 @@ package logger
 
 import (
 	"log"
+	"os"
 
 	colorPrint "github.com/fatih/color"
 )
@@ -20,13 +21,16 @@ func Text(text string) {
 	colorPrint.White(INDENT + text + "\n")
 }
 
+func Debug(textTemplate string, params ...interface{}) {
+	if os.Getenv("LOG_LEVEL") == "debug" {
+		colorPrint.Magenta("\n"+INDENT+textTemplate, params...)
+	}	
+}
+
 func Warn(textTemplate string, params ...interface{}) {
 	colorPrint.Yellow("\n"+INDENT+"WARNING: "+textTemplate, params...)
 }
 
-func Debug(textTemplate string, params ...interface{}) {
-	colorPrint.Magenta("\n"+INDENT+"DEBUG: "+textTemplate, params...)
-}
 
 func Error(textTemplate string, params ...interface{}) {
 	colorPrint.Red("\n"+INDENT+"ERROR: "+textTemplate, params...)

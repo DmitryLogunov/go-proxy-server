@@ -1,3 +1,6 @@
-aaa: http://localhost:9000/aaa  
-bbb: http://localhost:9001/bbb  
-ccc: http://localhost:9002/ccc
+transparent:
+  /aaa: http://http-server-1/aaa
+  /bbb: http://http-server-2/bbb
+authentificate:
+  /ccc: http://http-server-3/ccc
+

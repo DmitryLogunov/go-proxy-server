@@ -4,10 +4,10 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"github.com/gopkg.in/yaml"
+	"gopkg.in/yaml.v2"
 )
 
-// ReadOneLevelYaml reads YAML file with one level depth and return map 
+// ReadOneLevelYaml reads YAML file with one level depth and return map
 func ReadOneLevelYaml(relativePathToYamlFile string) (data map[string]string, err error) {
 	dataYAML, err := readTextFile(relativePathToYamlFile)
 	if err != nil {
@@ -22,6 +22,21 @@ func ReadOneLevelYaml(relativePathToYamlFile string) (data map[string]string, er
 	return
 }
 
+// ReadTwoLevelYaml reads YAML file with two level depth and return map
+func ReadTwoLevelYaml(relativePathToYamlFile string) (data map[string]map[string]string, err error) {
+	dataYAML, err := readTextFile(relativePathToYamlFile)
+	if err != nil {
+		return make(map[string]map[string]string), err
+	}
+	
+    data, err = parseTwoLevelYAML(dataYAML)
+    if err != nil {
+    	return make(map[string]map[string]string), err
+	}
+  
+	return
+  }
+
 // parseOneLevelYAML ...
 func parseOneLevelYAML(data string) (parsedData map[string]string, err error) {
 	err = yaml.Unmarshal([]byte(data), &parsedData)
@@ -31,6 +46,15 @@ func parseOneLevelYAML(data string) (parsedData map[string]string, err error) {
 
 	return
 }
+
+func parseTwoLevelYAML(data string) (parsedData map[string]map[string]string, err error) {  
+	err = yaml.Unmarshal([]byte(data), &parsedData)
+	if err != nil {
+		return make(map[string]map[string]string), err
+	  }
+  
+	return
+  }
 
 // absolutePath ...
 func absolutePath(relativePath string) (absolutePath string, err error) {

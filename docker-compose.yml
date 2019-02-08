@@ -1,0 +1,14 @@
+version: '2'
+services:
+  proxy-server:
+    image: proxy-server.0.3.1
+    volumes:
+      - ./routes.yml:/usr/src/app/routes.yml
+    environment:
+      - LOG_LEVEL=debug
+    ports:
+      - 8080:80
+networks:
+  default:
+    external:
+      name: proxy-test     
