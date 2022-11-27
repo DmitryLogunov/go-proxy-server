@@ -1,13 +1,13 @@
 package files
 
 import (
+	yaml "gopkg.in/yaml.v2"
 	"io"
 	"os"
 	"path/filepath"
-	"github.com/gopkg.in/yaml"
 )
 
-// ReadOneLevelYaml reads YAML file with one level depth and return map 
+// ReadOneLevelYaml reads YAML file with one level depth and return map
 func ReadOneLevelYaml(relativePathToYamlFile string) (data map[string]string, err error) {
 	dataYAML, err := readTextFile(relativePathToYamlFile)
 	if err != nil {

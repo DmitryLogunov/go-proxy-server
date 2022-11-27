@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"os"
 
-	"proxy/helpers/files"
-	"proxy/helpers/logger"
-	"proxy/helpers/proxyhttp"
-	"proxy/middlewares/auth"
+	"github.com/DmitryLogunov/http-middlewares-proxy/helpers/files"
+	"github.com/DmitryLogunov/http-middlewares-proxy/helpers/logger"
+	"github.com/DmitryLogunov/http-middlewares-proxy/helpers/proxyhttp"
+	"github.com/DmitryLogunov/http-middlewares-proxy/middlewares/auth"
 
 	"github.com/justinas/alice"
 )
