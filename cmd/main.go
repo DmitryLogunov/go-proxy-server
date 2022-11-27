@@ -36,25 +36,25 @@ func main() {
 
 	for routeEndpoint, routeData := range routes {
 		logger.Info("/" + routeEndpoint + ": \n")
+
 		var authenticationStrategy = routeData["authentication"]
 		var proxyUrl = routeData["url"]
 
 		logger.Info(" --> url: " + proxyUrl)
 		logger.Info(" --> authentication: " + authenticationStrategy)
 
+		handler := http_proxy.Handler(routeEndpoint, proxyUrl)
+
 		if authenticationStrategy == "jwt" {
-			handler := http_proxy.Handler(routeEndpoint, proxyUrl)
 			http.Handle("/"+routeEndpoint, jwtAuthMiddleware.ThenFunc(handler))
 			continue
 		}
 
 		if authenticationStrategy == "token" {
-			handler := http_proxy.Handler(routeEndpoint, proxyUrl)
 			http.Handle("/"+routeEndpoint, tokenAuthMiddleware.ThenFunc(handler))
 			continue
 		}
 
-		handler := http_proxy.Handler(routeEndpoint, proxyUrl)
 		http.Handle("/"+routeEndpoint, noneAuthMiddleware.ThenFunc(handler))
 	}
 
