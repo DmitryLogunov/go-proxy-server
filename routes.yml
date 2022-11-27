@@ -1,3 +1,9 @@
-aaa: http://localhost:9000/aaa  
-bbb: http://localhost:9001/bbb  
-ccc: http://localhost:9002/ccc
+aaa:
+  url: http://localhost:9000/aaa
+  authentication: token
+bbb:
+  url: http://localhost:9001/bbb
+  authentication: none
+ccc:
+  url: http://localhost:9002/ccc
+  authentication: jwt
